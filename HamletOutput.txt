@@ -283,6 +283,7 @@
 
 
 
+
   
   
   
@@ -990,8 +991,8 @@ by William Shakespeare
   Clown. Mine, sir.
   Clown. Of all the days i' th' year, I came to't that day that our
   Clown. One that was a woman, sir; but, rest her soul, she's dead.
-  Clown. (Sings)
   Clown. (sings)
+  Clown. (Sings)
   Clown. 'Tis a quick lie, sir; 'twill away again from me to you.
   Clown. To't.
   Clown. 'Twill not he seen in him there. There the men are as mad as
@@ -1139,14 +1140,14 @@ Elsinore. The platform before the Castle.
     Enter Fortinbras and English Ambassadors, with Drum,
 Enter Fortinbras with his Army over the stage.
                      Enter four or five Players.
-                        Enter Ghost.
                          Enter Ghost.
+                        Enter Ghost.
                       Enter Ghost again.
 Enter Ghost and Hamlet.
-                          Enter Hamlet.
                          Enter Hamlet.
                            Enter Hamlet.
 Enter Hamlet.
+                          Enter Hamlet.
         Enter Hamlet and Guildenstern [with Attendants].
 Enter Hamlet and Horatio.
                  Enter Hamlet and Horatio afar off.
@@ -1160,8 +1161,8 @@ Enter Hamlet, Horatio, and Marcellus.
           Enter Horatio, Marcellus, and Bernardo.
 Enter Horatio, Queen, and a Gentleman.
 Enter Horatio with an Attendant.
-                    Enter King.
 Enter King.
+                    Enter King.
 Enter King and Laertes.
                    Enter King and Polonius.
 Enter King and Queen, with Rosencrantz and Guildenstern.
@@ -1174,10 +1175,10 @@ Enter Laertes and Ophelia.
                        Enter Ophelia.
                       Enter Ophelia.  
                  Enter Ophelia distracted.
-                   Enter Polonius.
                          Enter Polonius.
                         Enter Polonius.
                             Enter Polonius.
+                   Enter Polonius.
                        Enter Polonius.  
 Enter Polonius and Reynaldo.
             Enter Polonius, Rosencrantz, and Guildenstern.
@@ -1187,10 +1188,10 @@ Enter Polonius and Reynaldo.
                            Enter Queen.
 Enter Queen and Polonius.
                     Enter Rosencrantz.
-                    Enter Rosencrantz and Guildenstern.
                Enter Rosencrantz and Guildenstern.
                 Enter Rosencrantz and Guildenstern.
              Enter Rosencrantz and Guildenstern.
+                    Enter Rosencrantz and Guildenstern.
                           Enter Sailors.
     entertainment than yours. You are welcome. But my uncle-father
     entertainment the players shall receive from you. We coted them
@@ -1228,8 +1229,8 @@ Enter two Sentinels-[first,] Francisco, [who paces up and down
                                                          Exeunt.
             Exeunt marching; after the which a peal of ordnance
                                                           Exeunt
-                                        [Exeunt all but Hamlet.]
                                         Exeunt [all but Hamlet].
+                                        [Exeunt all but Hamlet.]
                                         [Exeunt all but Hamlet.]  
                               Exeunt all but Hamlet and Horatio.
                                    Exeunt [all but the Captain].
@@ -1240,10 +1241,10 @@ Enter two Sentinels-[first,] Francisco, [who paces up and down
                        Exeunt King and Queen, [with Attendants].
                                                  Exeunt Players.
                  Exeunt Polonius and Players [except the First].
-                            Exeunt Rosencrantz and Guildenstern]
                             Exeunt Rosencrantz and Guildenstern.
-                          [Exeunt Rosencrantz and Guildenstern.]
+                            Exeunt Rosencrantz and Guildenstern]
                           Exeunt [Rosencrantz and Guildenstern].
+                          [Exeunt Rosencrantz and Guildenstern.]
                             [Exeunt Rosencrantz and Guildenstern
                  Exeunt Rosencrantz and Guildenstern, [with some
                                  Exeunt Voltemand and Cornelius.
@@ -1262,8 +1263,8 @@ Exit.
                                                  [Exit Horatio.]  
                                                     [Exit Lord.]
                                                  Exit Messenger.
-                                                Exit [Polonius].
                                                 [Exit Polonius.]
+                                                Exit [Polonius].
                                                 Exit [Polonius].  
                                                    [Exit Queen.]
                                                   Exit Reynaldo.
@@ -1340,8 +1341,8 @@ Flourish. [Enter King and Queen, Rosencrantz and Guildenstern, cum aliis.
     For out o' doors he went without their help
          For some must watch, while some must sleep:
     (For so this side of our known world esteem'd him)
-           For such a guest is meet.
               For such a guest is meet.
+           For such a guest is meet.
     For that which thou hast done,- must send thee hence
     Forth at your eyes your spirits wildly peep;
     For the apparel oft proclaims the man,
@@ -1682,8 +1683,8 @@ Flourish. [Enter King and Queen, Rosencrantz and Guildenstern, cum aliis.
   Ham. I would you did, sir; yet, in faith, if you did, it would not
   Ham. Judgment!
   Ham. Lady, shall I lie in your lap?
-                                                          HAMLET.'
                                                      'HAMLET.'
+                                                          HAMLET.'
     Hamlet comes back. What would you undertake
   Ham. Let her not walk i' th' sun. Conception is a blessing, but not
     Hamlet in madness hath Polonius slain,
@@ -1848,8 +1849,8 @@ Flourish. [Enter King and Queen, Rosencrantz and Guildenstern, cum aliis.
   Ham. Who, I?
   Ham. Who is to be buried in't?
   Ham. Whose was it?
-  Ham. Why,
   Ham. Why?
+  Ham. Why,
   Ham. Why,
   Ham. Why, anything- but to th' purpose. You were sent for; and
   Ham. Why did you laugh then, when I said 'Man delights not me'?
@@ -2607,8 +2608,8 @@ Lords Attendant.
   Mar. And liegemen to the Dane.
     Marcellus?
     (Marcellus and Bernardo) on their watch
-  Marcellus, officer.
   Marcellus, Officer.
+  Marcellus, officer.
     march. [Enter King, Queen, Polonius, Ophelia, Rosencrantz,
                                                  [March within.]
   Mar. Good now, sit down, and tell me he that knows,
@@ -2915,8 +2916,8 @@ Near Elsinore.
   Oph. Pray let's have no words of this; but when they ask, you what
   Oph. Pray you mark.
   Oph. Say you? Nay, pray You mark.
-  Oph. (sings)
   Oph. (Sings)
+  Oph. (sings)
   Oph. (sings)
   Oph. (sings)
   Oph. So please you, something touching the Lord Hamlet.  

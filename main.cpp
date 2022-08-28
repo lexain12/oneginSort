@@ -5,21 +5,16 @@
 
 int main() 
 {
-    const char *line2 = "  Lords, ladies, Officers, Soldiers, Sailors, Messengers, Attendants.";
-    const char *line1 = "Ghost of Hamlet's Father.";
+    InputFile inputFile = 
+    {
+        "HamletOrig.txt",
+    };
 
-    printf("%d\n", isBigger(line1, line2));
+    readFileToArray(&inputFile);
 
-    char** arrayOfLines = nullptr;
+    sortOnegin(inputFile.arrayOfLines, inputFile.numberOfLines);
 
-    int numberOfLines = readFileToArray("HamletOrig.txt", &arrayOfLines);
-
-    assert(arrayOfLines != nullptr);
-
-    sortOnegin(arrayOfLines, numberOfLines);
-
-    fprintf(stderr, "Ok\n");
-    printArrayInFile("HamletOutput.txt", (const char***) &arrayOfLines, numberOfLines);
+    printArrayInFile("HamletOutput.txt", &inputFile);
 
     return 0;
 }

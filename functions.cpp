@@ -2,6 +2,8 @@
 #include <ctype.h>
 #include <assert.h>
 
+#include "functions.h"
+
 bool isBigger(const char* line1, const char* line2)
 {
     assert(line1 != nullptr);
@@ -18,10 +20,10 @@ bool isBigger(const char* line1, const char* line2)
             ++line1;
             ++line2;
         }
-        if (!isalpha(*line1))
+        if (!isalpha(*line1)) // while
             ++line1;
 
-        if (!isalpha(*line2))
+        if (!isalpha(*line2)) // while
             ++line2;
     }
 
@@ -33,17 +35,18 @@ bool isBigger(const char* line1, const char* line2)
 
 int countLines(FILE *inputFile)
 {
-    assert(inputFile != nullptr);
+    assert(inputFile != nullptr); // ded assert
 
     size_t counter = 0;
 
-    char *line = (char*) calloc(256, sizeof(char));
+    rewind(inputFile);
+
+    char *line = (char*) calloc(256, sizeof(char)); // static
     while (fgets(line, 256, inputFile))
     {
         ++counter;
     }
     free(line);
-    rewind(inputFile);
 
     return counter;
 }
@@ -53,6 +56,8 @@ void readLines(char **arrayOfLines, FILE *inputFile, int numberOfLines)
     assert(arrayOfLines != NULL);
     assert(inputFile    != NULL);
 
+    rewind(inputFile);
+
     for (size_t i = 0; i < numberOfLines; ++i)
     {
         char *line = (char*) calloc(256, sizeof(char));
@@ -61,18 +66,9 @@ void readLines(char **arrayOfLines, FILE *inputFile, int numberOfLines)
 
         arrayOfLines[i] = line;
     }
-
-
 }
 
-void swapLines(char* line1, char* line2)
-{
-    char* tmp = line1;
-    line1 = line2;
-    line2 = tmp;
-}
-
-void sortOnegin(char** arrayOfLines, int numberOfLines)
+void sortOnegin(char** arrayOfLines, int numberOfLines) // size_t
 {
     for (int i = 0; i < numberOfLines; ++i)
     {
@@ -88,30 +84,28 @@ void sortOnegin(char** arrayOfLines, int numberOfLines)
     }
 }
 
-int readFileToArray(const char* fileName, char*** arrayOfLines)
+void readFileToArray(InputFile* inputFile)
 {
-    FILE *inputFile = fopen(fileName, "r");
-    assert(inputFile != NULL);
+    FILE *openedFile = fopen(inputFile->fileName, "r");
+    // check file
     
-    int numberOfLines = countLines(inputFile);
-    printf("%d", numberOfLines);
+    inputFile->numberOfLines = countLines(openedFile);
 
-    *arrayOfLines = (char**) calloc(numberOfLines, sizeof(char *));
-    readLines(*arrayOfLines, inputFile, numberOfLines);
+    inputFile->arrayOfLines = (char**) calloc(inputFile->numberOfLines, sizeof(char *));
+    // check ptr
+    readLines(inputFile->arrayOfLines, openedFile, inputFile->numberOfLines);
 
-    fclose(inputFile);
-
-    return numberOfLines;
+    fclose(openedFile);
 }
 
-void printArrayInFile(const char* outputFile, const char*** arrayOfLines, int numberOfLines)
+void printArrayInFile(const char* outputFile,InputFile* inputFile)
 {
     FILE* fileToPrint = fopen(outputFile, "w+");
+    // 
 
-    for (int i = 0; i < numberOfLines; ++i)
-    {
-        fprintf(stderr, "%d %s\n", i, (*arrayOfLines)[i]);
-        fprintf(fileToPrint, "%s", (*arrayOfLines)[i]);
-    }
+    for (size_t i = 0; i < inputFile->numberOfLines; ++i)
+        fprintf(fileToPrint, "%s", (inputFile->arrayOfLines)[i]);
+
     fclose(fileToPrint);
 }
+
