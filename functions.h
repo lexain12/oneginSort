@@ -1,4 +1,9 @@
-struct InputFile 
+#define ASSERT(condition) if(!(condition))          \
+{                                                    \
+    printf("Error in condition:%s line:%d\n", #condition, __LINE__); \
+}
+
+struct InputFile   
 {
     char*  fileName      = nullptr;
     size_t numberOfLines = 0;
@@ -9,11 +14,11 @@ bool isBigger(const char* line1, const char* line2);
 
 int countLines(FILE *intputFile);
 
-void sortOnegin(char** arrayOfLines, int numberOfLines);
+void sortOnegin(char** arrayOfLines, size_t numberOfLines);
 
 void swapLines(char* line1, char* line2);
 
-void readLines(char **arrayOfLines, FILE *inputFile, int numberOfLines);
+void readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines);
 
 void printArrayInFile(const char* outputFile,InputFile* inputFile);
 

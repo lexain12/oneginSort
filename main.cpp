@@ -5,10 +5,7 @@
 
 int main() 
 {
-    InputFile inputFile = 
-    {
-        "HamletOrig.txt",
-    };
+    InputFile inputFile = {"HamletOrig.txt"};
 
     readFileToArray(&inputFile);
 
