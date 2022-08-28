@@ -9,3 +9,5 @@ void swapLines(char* line1, char* line2);
 void readLines(char **arrayOfLines, FILE *inputFile, int numberOfLines);
 
 int readFileToArray(const char* fileName, char*** arrayOfLines);
+
+void printArrayInFile(const char* outputFile, const char*** arrayOfLines, int numberOfLines);

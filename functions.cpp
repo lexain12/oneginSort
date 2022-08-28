@@ -103,3 +103,15 @@ int readFileToArray(const char* fileName, char*** arrayOfLines)
 
     return numberOfLines;
 }
+
+void printArrayInFile(const char* outputFile, const char*** arrayOfLines, int numberOfLines)
+{
+    FILE* fileToPrint = fopen(outputFile, "w+");
+
+    for (int i = 0; i < numberOfLines; ++i)
+    {
+        fprintf(stderr, "%d %s\n", i, (*arrayOfLines)[i]);
+        fprintf(fileToPrint, "%s", (*arrayOfLines)[i]);
+    }
+    fclose(fileToPrint);
+}

@@ -12,17 +12,16 @@ int main()
 
     char** arrayOfLines = nullptr;
 
-    int numberOfLines = readFileToArray("HamletTest.txt", &arrayOfLines);
+    int numberOfLines = readFileToArray("HamletOrig.txt", &arrayOfLines);
 
     assert(arrayOfLines != nullptr);
 
     sortOnegin(arrayOfLines, numberOfLines);
 
-    for (int i = 0; i < numberOfLines; ++i)
-    {
-        printf("%s", arrayOfLines[i]);
-    }
+    fprintf(stderr, "Ok\n");
+    printArrayInFile("HamletOutput.txt", (const char***) &arrayOfLines, numberOfLines);
 
+    return 0;
 }
 
 
