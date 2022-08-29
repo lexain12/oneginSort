@@ -1156,8 +1156,8 @@ Enter Hamlet, Horatio, and Marcellus.
                  Enter Hamlet, reading on a book.
        Enter Hamlet, Rosencrantz, [Guildenstern,] and others.
                       Enter Horatio.
-                   Enter Horatio and Marcellus.
                     Enter Horatio and Marcellus.  
+                   Enter Horatio and Marcellus.
           Enter Horatio, Marcellus, and Bernardo.
 Enter Horatio, Queen, and a Gentleman.
 Enter Horatio with an Attendant.
@@ -1172,14 +1172,14 @@ Enter King, Rosencrantz, and Guildenstern.
 Enter Laertes and Ophelia.
                     Enter Laertes with others.
                          Enter Lucianus.
-                       Enter Ophelia.
                       Enter Ophelia.  
+                       Enter Ophelia.
                  Enter Ophelia distracted.
-                         Enter Polonius.
-                        Enter Polonius.
-                            Enter Polonius.
-                   Enter Polonius.
                        Enter Polonius.  
+                            Enter Polonius.
+                         Enter Polonius.
+                   Enter Polonius.
+                        Enter Polonius.
 Enter Polonius and Reynaldo.
             Enter Polonius, Rosencrantz, and Guildenstern.
               Enter Polonius, Voltemand, and Cornelius.
@@ -1221,17 +1221,16 @@ Enter two Sentinels-[first,] Francisco, [who paces up and down
                                                          Exeunt.
                                                          Exeunt.
                                                          Exeunt.
-                                                         Exeunt.
-                                                         Exeunt.
-                                                         Exeunt.
-                                                         Exeunt.
-                                                         Exeunt.
-                                                         Exeunt.
-            Exeunt marching; after the which a peal of ordnance
                                                           Exeunt
+                                                         Exeunt.
+                                                         Exeunt.
+                                                         Exeunt.
+                                                         Exeunt.
+                                                         Exeunt.
+                                                         Exeunt.
+                                        [Exeunt all but Hamlet.]  
                                         Exeunt [all but Hamlet].
                                         [Exeunt all but Hamlet.]
-                                        [Exeunt all but Hamlet.]  
                               Exeunt all but Hamlet and Horatio.
                                    Exeunt [all but the Captain].
                                             [Exeunt Attendants.]
@@ -1239,13 +1238,14 @@ Enter two Sentinels-[first,] Francisco, [who paces up and down
                                         Exeunt Ghost and Hamlet.
                                       Exeunt King and Polonius].
                        Exeunt King and Queen, [with Attendants].
+            Exeunt marching; after the which a peal of ordnance
                                                  Exeunt Players.
                  Exeunt Polonius and Players [except the First].
-                            Exeunt Rosencrantz and Guildenstern.
-                            Exeunt Rosencrantz and Guildenstern]
-                          Exeunt [Rosencrantz and Guildenstern].
-                          [Exeunt Rosencrantz and Guildenstern.]
                             [Exeunt Rosencrantz and Guildenstern
+                          [Exeunt Rosencrantz and Guildenstern.]
+                            Exeunt Rosencrantz and Guildenstern.
+                          Exeunt [Rosencrantz and Guildenstern].
+                            Exeunt Rosencrantz and Guildenstern]
                  Exeunt Rosencrantz and Guildenstern, [with some
                                  Exeunt Voltemand and Cornelius.
 Exit.
@@ -1259,13 +1259,13 @@ Exit.
                                                      Exit Ghost.
                                                      Exit Ghost.
                                                      Exit Ghost.
-                                                   Exit Horatio.
                                                  [Exit Horatio.]  
+                                                   Exit Horatio.
                                                     [Exit Lord.]
                                                  Exit Messenger.
-                                                [Exit Polonius.]
-                                                Exit [Polonius].
                                                 Exit [Polonius].  
+                                                Exit [Polonius].
+                                                [Exit Polonius.]
                                                    [Exit Queen.]
                                                   Exit Reynaldo.
                                             [Exit Second Clown.]  

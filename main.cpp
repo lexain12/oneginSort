@@ -9,7 +9,7 @@ int main()
 
     readFileToArray(&inputFile);
 
-    sortOnegin(inputFile.arrayOfLines, inputFile.numberOfLines);
+    sortOnegin(&inputFile);
 
     printArrayInFile("HamletOutput.txt", &inputFile);
 

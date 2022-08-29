@@ -20,10 +20,10 @@ bool isBigger(const char* line1, const char* line2)
             ++line1;
             ++line2;
         }
-        while (!isalpha(*line1)) 
+        while (!isalpha(*line1) && *line1 != '\n') 
             ++line1;
 
-        while (!isalpha(*line2))
+        while (!isalpha(*line2) && *line2 != '\n')
             ++line2;
     }
 
@@ -67,17 +67,17 @@ void readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines)
     }
 }
 
-void sortOnegin(char** arrayOfLines, size_t numberOfLines) // size_t
+void sortOnegin(InputFile* inputFile) // size_t
 {
-    for (int i = 0; i < numberOfLines; ++i)
+    for (int i = 0; i < inputFile->numberOfLines; ++i)
     {
-        for (int j = i; j < numberOfLines; ++j) 
+        for (int j = i; j < inputFile->numberOfLines; ++j) 
         {
-            if (isBigger(arrayOfLines[i], arrayOfLines[j]))
+            if (isBigger(inputFile->arrayOfLines[i], inputFile->arrayOfLines[j]))
             {
-                char* tmp = arrayOfLines[i];
-                arrayOfLines[i] = arrayOfLines[j];
-                arrayOfLines[j] = tmp;
+                char* tmp = inputFile->arrayOfLines[i];
+                inputFile->arrayOfLines[i] = inputFile->arrayOfLines[j];
+                inputFile->arrayOfLines[j] = tmp;
             }
         }
     }

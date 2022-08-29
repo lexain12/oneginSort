@@ -14,7 +14,7 @@ bool isBigger(const char* line1, const char* line2);
 
 int countLines(FILE *intputFile);
 
-void sortOnegin(char** arrayOfLines, size_t numberOfLines);
+void sortOnegin(InputFile* inputFile);
 
 void swapLines(char* line1, char* line2);
 
