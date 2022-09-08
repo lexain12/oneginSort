@@ -24,3 +24,6 @@ void printArrayInFile(const char* outputFile,InputFile* inputFile);
 
 void readFileToArray(InputFile* inputFile);
 
+char* readFile(InputFile *inputFile);
+
+void splitIntoLines(char* arrayOfLines, InputFile *inputFile);

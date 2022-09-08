@@ -7,9 +7,16 @@ int main()
 {
     InputFile inputFile = {"HamletOrig.txt"};
 
-    readFileToArray(&inputFile);
+    splitIntoLines(readFile(&inputFile), &inputFile);
+    printf("Ok\n");
+    printf("%i\n", inputFile.numberOfLines);
 
     sortOnegin(&inputFile);
+
+    for (int i = 0; i < inputFile.numberOfLines; i++)
+    {
+        printf("%s\n", inputFile.arrayOfLines[i]);
+    }
 
     printArrayInFile("HamletOutput.txt", &inputFile);
 
