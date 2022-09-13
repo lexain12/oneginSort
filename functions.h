@@ -3,15 +3,21 @@
     printf("Error in condition:%s line:%d\n", #condition, __LINE__); \
 }
 
+struct Line
+{
+    size_t length   = 0;
+    char* charArray = nullptr;
+};
+
 struct InputFile   
 {
     char*  fileName      = nullptr;
     size_t numberOfLines = 0;
-    char** arrayOfLines  = nullptr;
+    Line* arrayOfLines  = nullptr;
 };
 
-bool isBigger(const char* line1, const char* line2);
-
+int isBigger(const char* line1, const char* line2);
+  
 int countLines(FILE *intputFile);
 
 void sortOnegin(InputFile* inputFile);
@@ -27,3 +33,4 @@ void readFileToArray(InputFile* inputFile);
 char* readFile(InputFile *inputFile);
 
 void splitIntoLines(char* arrayOfLines, InputFile *inputFile);
+

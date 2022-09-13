@@ -3,10 +3,12 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../MyFunctions/QsortFunc.h"
+
 
 #include "functions.h"
 
-bool isBigger(const char* line1, const char* line2)
+int isBigger(const char* line1, const char* line2)
 {
     assert(line1 != nullptr);
     assert(line2 != nullptr);
@@ -29,10 +31,7 @@ bool isBigger(const char* line1, const char* line2)
             ++line2;
     }
 
-    if (*line1 == '\n')
-        return false;
-
-    return true;
+    return *line1 - *line2;
 }
 
 char* readFile(InputFile *inputFile)
@@ -43,19 +42,21 @@ char* readFile(InputFile *inputFile)
 
     size_t numberOfChars = ftell(openedFile);
 
-    printf("ok");
     fseek(openedFile, 0l, 0);
-    char* fileArray = (char*) calloc(numberOfChars - 1, sizeof(char));
-    printf("%li", fread((void*) fileArray, sizeof(char), numberOfChars-1, openedFile));
+    char* fileArray = (char*) calloc(numberOfChars, sizeof(char));
+    assert(fread((void*) fileArray, sizeof(char), numberOfChars, openedFile) != 0); // GOvno
 
     int i = 0;
     for (;fileArray[i] != '\0'; i++) 
     {
         if (fileArray[i] == '\n')
         {
+            inputFile->numberOfLines += 1;
             fileArray[i] = '\0';
         }
     }
+//    fprintf(stderr, "%s", fileArray);
+//    fprintf(stderr, "%d", inputFile->numberOfLines);
 
     fileArray[i] = '\n';
 
@@ -66,14 +67,20 @@ char* readFile(InputFile *inputFile)
 
 void splitIntoLines(char* fileArray, InputFile *inputFile)
 {
-    FILE* openedFile = fopen(inputFile->fileName, "r");
-    inputFile->numberOfLines = countLines(openedFile);
-    inputFile->arrayOfLines = (char**) calloc(inputFile->numberOfLines-1, sizeof(char*));
-    fclose(openedFile);
+    assert(fileArray != NULL);
+    assert(inputFile != NULL);
+
+    inputFile->arrayOfLines = (Line*) calloc(inputFile->numberOfLines, sizeof(Line));
+    assert(inputFile->arrayOfLines != NULL);
     
     int line = 0;
 
-    inputFile->arrayOfLines[line] = fileArray;
+//    fprintf(stderr, "%s", ((inputFile->arrayOfLines)[line]).charArray);
+    
+    ((inputFile->arrayOfLines)[line]).charArray = fileArray;
+
+//    fprintf(stderr, "%s", ((inputFile->arrayOfLines)[line]).charArray);
+
     line++;
 
     int i = 1;
@@ -81,30 +88,35 @@ void splitIntoLines(char* fileArray, InputFile *inputFile)
     {
         if (fileArray[i] == '\0')
         {
-           inputFile->arrayOfLines[line++] =  &fileArray[i+1];
+           ((inputFile->arrayOfLines)[line - 1]).length = &fileArray[i] - ((inputFile->arrayOfLines)[line - 1]).charArray;
+//           fprintf(stderr, "%d %d\n", &fileArray[i], ((inputFile->arrayOfLines)[line - 1]).charArray);
+           (inputFile->arrayOfLines[line]).charArray =  &fileArray[i+1];
+//           fprintf(stderr, "%s\n", ((inputFile->arrayOfLines)[line]).charArray);
+//           fprintf(stderr, "%d\n", ((inputFile->arrayOfLines)[line - 1]).length);
+           line++;
         }
     }
 
-    inputFile->arrayOfLines[line++] =  &fileArray[i+1];
-    printf("%d\n", line);
+    ((inputFile->arrayOfLines)[line - 1]).length = &fileArray[i] - ((inputFile->arrayOfLines)[line - 1]).charArray;
+    (inputFile->arrayOfLines[line++]).charArray =  &fileArray[i+1];
 }
 
-int countLines(FILE *inputFile)
-{
-    ASSERT(inputFile != nullptr); 
-
-    size_t counter = 0;
-
-    rewind(inputFile);
-
-    char line[256] = "";
-    while (fgets(line, 256, inputFile))
-    {
-        ++counter;
-    }
-
-    return counter;
-}
+//int countLines(FILE *inputFile)
+//{
+//    ASSERT(inputFile != nullptr); 
+//
+//    size_t counter = 0;
+//
+//    rewind(inputFile);
+//
+//    char line[256] = "";
+//    while (fgets(line, 256, inputFile))
+//    {
+//        ++counter;
+//    }
+//
+//    return counter;
+//}
 
 //void readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines)
 //{
@@ -125,20 +137,24 @@ int countLines(FILE *inputFile)
 
 void sortOnegin(InputFile* inputFile) // size_t
 {
-    for (int i = 0; i < inputFile->numberOfLines; ++i)
-    {
-        for (int j = i; j < inputFile->numberOfLines; ++j) 
-        {
-            if (strcmp(inputFile->arrayOfLines[i], inputFile->arrayOfLines[j]) > 0)
-            {
-                char* tmp = inputFile->arrayOfLines[i];
-                inputFile->arrayOfLines[i] = inputFile->arrayOfLines[j];
-                inputFile->arrayOfLines[j] = tmp;
-            }
-        }
-    }
-}
 
+//    fprintf(stderr, "%d\n", inputFile->numberOfLines);
+    Qsort(inputFile->arrayOfLines, inputFile->numberOfLines, sizeof(Line), cmpstruct);
+//
+//    for (int i = 0; i < inputFile->numberOfLines; ++i)
+//    {
+//        for (int j = i; j < inputFile->numberOfLines; ++j) 
+//        {
+//            if (strcmp(inputFile->arrayOfLines[i], inputFile->arrayOfLines[j]) > 0)
+//            {
+//                char* tmp = inputFile->arrayOfLines[i];
+//                inputFile->arrayOfLines[i] = inputFile->arrayOfLines[j];
+//                inputFile->arrayOfLines[j] = tmp;
+//            }
+//        }
+//    }
+}
+//
 //void readFileToArray(InputFile* inputFile)
 //{
 //    FILE *openedFile = fopen(inputFile->fileName, "r");
@@ -156,11 +172,12 @@ void sortOnegin(InputFile* inputFile) // size_t
 
 void printArrayInFile(const char* outputFile,InputFile* inputFile)
 {
-    FILE* fileToPrint = fopen(outputFile, "w+");
+    FILE* fileToPrint = fopen(outputFile, "a");
     ASSERT(fileToPrint != nullptr);
+    fseek(fileToPrint, 0l, 2);
 
     for (size_t i = 0; i < inputFile->numberOfLines; ++i)
-        fprintf(fileToPrint, "%s\n", (inputFile->arrayOfLines)[i]);
+        fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
 
     fclose(fileToPrint);
 }

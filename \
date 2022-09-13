@@ -12,6 +12,9 @@ int main()
   InputFile inputFile = {"HamletOrig.txt"};
 
   splitIntoLines (readFile (&inputFile), &inputFile);
+
+  Line a = {4, "line"};
+  Line b = {4, "asdf"};
    
   sortOnegin(&inputFile);
 
