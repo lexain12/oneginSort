@@ -5,10 +5,12 @@
 #include <ctype.h>
 #include "functions.h"
 
-int isBigger(const char* line1, const char* line2);
 
 int cmpint(const void* arg1, const void* arg2)
 {
+    assert(arg1 != NULL);
+    assert(arg2 != NULL);
+
     if (*((int*) arg1) > *((int*) arg2))
         return 1;
     else if (*((int*)arg1) == *((int*)arg2))
@@ -20,7 +22,7 @@ int cmpint(const void* arg1, const void* arg2)
 int strcmp1(const char* arg1, const char* arg2)
 {
     assert(arg1 != NULL);
-    assert(arg1 != NULL);
+    assert(arg2 != NULL);
 
     while (*arg1 != '\0' && *arg2 != '\0')
     {
@@ -28,14 +30,13 @@ int strcmp1(const char* arg1, const char* arg2)
             ++arg1;
         while (!isalpha(*arg2) && *arg2 != '\0')
             ++arg2;
+
         if (*arg1 != *arg2 && arg1 && arg2)
             return toupper(*arg1) - toupper(*arg2);
-        else
-        {
-            ++arg1;
-            ++arg2;
-        }
+        ++arg1;
+        ++arg2;
     }
+
     return *arg1 - *arg2;
 }
 
@@ -65,10 +66,13 @@ int cmpstruct(const void* arg1, const void* arg2)
 
 int isBiggerReverse(const char* line1, const char* line2, size_t sizeOfLine1, size_t sizeOfLine2)
 {
+    assert(line1       != NULL);
+    assert(line2       != NULL);
+
     const char* index1 = sizeOfLine1 + line1 - 1;
     const char* index2 = sizeOfLine2 + line2 - 2;
-    fprintf(stderr, "%s %d\n", line1, sizeOfLine1);
-    fprintf(stderr, "%s %d\n", line2, sizeOfLine2);
+//    fprintf(stderr, "%s %d\n", line1, sizeOfLine1);
+//    fprintf(stderr, "%s %d\n", line2, sizeOfLine2);
 
     if (*line1 == '\0' || *line2 == '\0' || *line1 == '\n' || *line2 == '\n')
     {
@@ -83,9 +87,8 @@ int isBiggerReverse(const char* line1, const char* line2, size_t sizeOfLine1, si
         if (isalpha(*index1) && isalpha(*index2))
         {
             if (toupper(*index1) != toupper(*index2))
-            {
                 return toupper(*index1) - toupper(*index2);
-            }
+
             --index1;
             --index2;
         }
@@ -104,12 +107,14 @@ int cmpstructReverse(const void* arg1, const void* arg2)
     assert(arg1 != NULL);
     assert(arg2 != NULL);
     
-    const char* str1 = ((Line*) arg1)->charArray;
-    const char* str2 = ((Line*) arg2)->charArray;
+    const char*  str1    = ((Line*) arg1)->charArray;
+    const char*  str2    = ((Line*) arg2)->charArray;
+    const size_t length1 = ((Line*) arg1)->length;
+    const size_t length2 = ((Line*) arg2)->length;
 
 //    fprintf(stderr, "%s %s\n", str1, str2);
 
-    return isBiggerReverse(str1, str2, ((Line*) arg1)->length, ((Line*) arg2)->length);
+    return isBiggerReverse(str1, str2, length1, length2);
 }
 
 void swap(size_t size, void* pointer1, void* pointer2) // void *first, void *second, size_t size
