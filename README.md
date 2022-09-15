@@ -1,2 +1,2 @@
 # oneginSort
-This project that sorts line of Onegin poem 
+This project that sorts lines of Onegin poem 
