@@ -64,13 +64,17 @@ int cmpstruct(const void* arg1, const void* arg2)
     return isBigger(str1, str2);
 }
 
-int isBiggerReverse(const char* line1, const char* line2, size_t sizeOfLine1, size_t sizeOfLine2)
+int cmpstructReverse(const void* arg1, const void* arg2)
 {
-    assert(line1       != NULL);
-    assert(line2       != NULL);
-
-    const char* index1 = sizeOfLine1 + line1 - 1;
-    const char* index2 = sizeOfLine2 + line2 - 2;
+    assert(arg1 != NULL);
+    assert(arg2 != NULL);
+    
+    const char*  line1   = ((Line*) arg1)->charArray;
+    const char*  line2   = ((Line*) arg2)->charArray;
+    const size_t length1 = ((Line*) arg1)->length;
+    const size_t length2 = ((Line*) arg2)->length;
+    const char*  index1  = length1 + line1 - 1;
+    const char*  index2  = length2 + line2 - 1;
 //    fprintf(stderr, "%s %d\n", line1, sizeOfLine1);
 //    fprintf(stderr, "%s %d\n", line2, sizeOfLine2);
 
@@ -102,34 +106,16 @@ int isBiggerReverse(const char* line1, const char* line2, size_t sizeOfLine1, si
     return *index1 - *index2;
 }
 
-int cmpstructReverse(const void* arg1, const void* arg2)
+void swap(void* first, void* second, size_t size) 
 {
-    assert(arg1 != NULL);
-    assert(arg2 != NULL);
-    
-    const char*  str1    = ((Line*) arg1)->charArray;
-    const char*  str2    = ((Line*) arg2)->charArray;
-    const size_t length1 = ((Line*) arg1)->length;
-    const size_t length2 = ((Line*) arg2)->length;
-
-//    fprintf(stderr, "%s %s\n", str1, str2);
-
-    return isBiggerReverse(str1, str2, length1, length2);
-}
-
-void swap(size_t size, void* pointer1, void* pointer2) // void *first, void *second, size_t size
-{
-    assert(pointer1 != NULL);
-    assert(pointer2 != NULL);
+    assert(first  != NULL);
+    assert(second != NULL);
 
     for (size_t index = 0; index < size; index++)
     {
-        assert(pointer1 + index != NULL);
-        assert(pointer2 + index != NULL);
-
-        char tmp = *((char*) pointer1 + index);
-        *((char*) pointer1 + index) = *((char*) pointer2 + index);
-        *((char*) pointer2 + index) = tmp;
+        char tmp = *((char*) first + index);
+        *((char*) first  + index) = *((char*) second + index);
+        *((char*) second + index) = tmp;
     }
 }
 
@@ -145,17 +131,17 @@ void Qsort(void* array, size_t n, size_t size, int (*cmp)(const void*, const voi
     if (left >= right || n == 0)
         return;
 
-    swap(size, base + left * size, base + ((right + left) / 2) * size);
+    swap(base + left * size, base + ((right + left) / 2) * size, size);
 
     size_t last = left;
 
     for (int i = left + 1; i <= right; i++)
     {
         if ((*cmp)(base + left*size, base + i*size) > 0)
-            swap(size, (void*) (base + (++last) * size), (void*) (base + i * size));
+            swap((void*) (base + (++last) * size), (void*) (base + i * size), size);
     }
 
-    swap(size, (void*) (base + left * size), (void*) (base + last * size)); // base
+    swap((void*) (base + left * size), (void*) (base + last * size), size); // base
     Qsort(base + left*size, last-left, size, cmp);
     Qsort(base + (last + 1) * size, n - 1 - last, size, cmp);
 }

@@ -34,77 +34,79 @@ int isBigger(const char* line1, const char* line2)
     return *line1 - *line2;
 }
 
-char* readFile(InputFile *inputFile)
+size_t fileSize (FILE* file)
+{
+    fseek(file, 0l, SEEK_END); 
+    size_t size = ftell(file); 
+    fseek(file, 0l, SEEK_SET);
+
+    return size;
+}
+
+void readFile(InputFile *inputFile)
 {
     assert(inputFile != NULL);
 
     FILE* openedFile = fopen(inputFile->fileName, "r");
     assert(openedFile != NULL);
 
-    fseek(openedFile, 0l, SEEK_END);
+    size_t numberOfChars = fileSize(openedFile);
 
-    size_t numberOfChars = ftell(openedFile);
+    inputFile->text= (char*) calloc(numberOfChars, sizeof(char));
+    size_t charsReaded = fread((void*) inputFile->text, sizeof(char), numberOfChars, openedFile); // 
+    assert(charsReaded == numberOfChars); 
 
-    fseek(openedFile, 0l, SEEK_SET);
-
-    char* fileArray = (char*) calloc(numberOfChars, sizeof(char));
-    size_t charsReaded = fread((void*) fileArray, sizeof(char), numberOfChars, openedFile) != 0;
-
-    assert(charsReaded != NULL); 
-
-    int i = 0;
-    for (;fileArray[i] != '\0'; i++) 
+    size_t i = 0; 
+    for (;inputFile->text[i] != '\0'; i++) 
     {
-        if (fileArray[i] == '\n')
+        if (inputFile->text[i] == '\n')
         {
             inputFile->numberOfLines += 1;
-            fileArray[i] = '\0';
+            inputFile->text[i] = '\0';
         }
     }
 //    fprintf(stderr, "%s", fileArray);
 //    fprintf(stderr, "%d", inputFile->numberOfLines);
 
-    fileArray[i] = '\n';
+    inputFile->text[i] = '\n';
 
     fclose(openedFile);
-
-    return fileArray;
 }
 
-void splitIntoLines(char* fileArray, InputFile *inputFile)
+void splitIntoLines(InputFile *inputFile)
 {
-    assert(fileArray != NULL);
-    assert(inputFile != NULL);
+    assert(inputFile->text != NULL);
+    assert(inputFile       != NULL);
 
     inputFile->arrayOfLines = (Line*) calloc(inputFile->numberOfLines, sizeof(Line));
     assert(inputFile->arrayOfLines != NULL);
     
-    int line = 0;
+    size_t line = 0;
 
 //    fprintf(stderr, "%s", ((inputFile->arrayOfLines)[line]).charArray);
     
-    ((inputFile->arrayOfLines)[line]).charArray = fileArray;
+    ((inputFile->arrayOfLines)[line]).charArray = inputFile->text;
 
 //    fprintf(stderr, "%s", ((inputFile->arrayOfLines)[line]).charArray);
 
     line++;
 
     size_t i = 0;
-    for (; fileArray[i+1] != '\n'; i++)
+    for (; inputFile->text[i+1] != '\n'; i++)
     {
-        if (fileArray[i] == '\0')
+        if (inputFile->text[i] == '\0')
         {
-           ((inputFile->arrayOfLines)[line - 1]).length = &fileArray[i] - ((inputFile->arrayOfLines)[line - 1]).charArray;
+           inputFile->arrayOfLines[line - 1].length = &(inputFile->text)[i] - inputFile->arrayOfLines[line - 1].charArray;// govno
 //           fprintf(stderr, "%d %d\n", &fileArray[i], ((inputFile->arrayOfLines)[line - 1]).charArray);
-           (inputFile->arrayOfLines[line]).charArray =  &fileArray[i+1];
+           inputFile->arrayOfLines[line].charArray =  &(inputFile->text)[i + 1];
 //           fprintf(stderr, "%s\n", ((inputFile->arrayOfLines)[line]).charArray);
 //           fprintf(stderr, "%d\n", ((inputFile->arrayOfLines)[line - 1]).length);
            line++;
         }
     }
 
-    ((inputFile->arrayOfLines)[line - 1]).length = &fileArray[i] - ((inputFile->arrayOfLines)[line - 1]).charArray;
-    (inputFile->arrayOfLines[line++]).charArray =  &fileArray[i+1];
+    inputFile->arrayOfLines[line - 1].length = &(inputFile->text)[i] - inputFile->arrayOfLines[line - 1].charArray;
+    inputFile->arrayOfLines[line++].charArray =  &(inputFile->text)[i+1];
 }
 
 //int countLines(FILE *inputFile)
@@ -147,6 +149,7 @@ void sortOnegin(InputFile* inputFile) // size_t
 
 //    fprintf(stderr, "%d\n", inputFile->numberOfLines);
     Qsort(inputFile->arrayOfLines, inputFile->numberOfLines, sizeof(Line), cmpstruct);
+}
 //
 //    for (int i = 0; i < inputFile->numberOfLines; ++i)
 //    {
@@ -160,7 +163,6 @@ void sortOnegin(InputFile* inputFile) // size_t
 //            }
 //        }
 //    }
-}
 //
 //void readFileToArray(InputFile* inputFile)
 //{
@@ -177,11 +179,11 @@ void sortOnegin(InputFile* inputFile) // size_t
 //    fclose(openedFile);
 //}
 
-void printArrayInFile(const char* outputFile,InputFile* inputFile)
+void printArrayInFile(const char* outputFile, InputFile* inputFile)
 {
     FILE* fileToPrint = fopen(outputFile, "w");
     ASSERT(fileToPrint != nullptr);
-    fseek(fileToPrint, 0l, SEEK_SET);
+    // fseek(fileToPrint, 0l, SEEK_SET);
 
     for (size_t i = 0; i < inputFile->numberOfLines; ++i)
         fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
@@ -193,7 +195,7 @@ void addArrayInFile(const char* outputFile,InputFile* inputFile)
 {
     FILE* fileToPrint = fopen(outputFile, "a");
     ASSERT(fileToPrint != nullptr);
-    fseek(fileToPrint, 0l, SEEK_END);
+    // fseek(fileToPrint, 0l, SEEK_END);
 
     fprintf(fileToPrint, "-------------------------------------------------------");
 

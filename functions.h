@@ -14,6 +14,7 @@ struct InputFile
     char*  fileName      = nullptr;
     size_t numberOfLines = 0;
     Line*  arrayOfLines  = nullptr;
+    char*  text          = nullptr;
 };
 
 int isBigger(const char* line1, const char* line2);
@@ -30,9 +31,9 @@ void printArrayInFile(const char* outputFile,InputFile* inputFile);
 
 void readFileToArray(InputFile* inputFile);
 
-char* readFile(InputFile *inputFile);
+void readFile(InputFile *inputFile);
 
-void splitIntoLines(char* arrayOfLines, InputFile *inputFile);
+void splitIntoLines(InputFile *inputFile);
 
 void addArrayInFile(const char* outputFile,InputFile* inputFile);
 

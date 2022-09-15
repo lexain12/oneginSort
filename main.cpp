@@ -3,12 +3,11 @@
 #include "functions.h"
 #include "../MyFunctions/QsortFunc.h"
 
-
 int main()
 {
   InputFile inputFile = {"HamletOrig.txt"};
-
-  splitIntoLines (readFile (&inputFile), &inputFile);
+  readFile (&inputFile);
+  splitIntoLines (&inputFile);
    
   sortOnegin(&inputFile);
 
