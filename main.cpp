@@ -11,11 +11,13 @@ int main()
    
   sortOnegin(&inputFile);
 
-  printArrayInFile("HamletOutput.txt", &inputFile);
+  printArrayInFile("HamletOutput.txt", &inputFile, sortedArray);
 
   Qsort(inputFile.arrayOfLines, inputFile.numberOfLines, sizeof(Line), cmpstructReverse);
 
-  addArrayInFile("HamletOutput.txt", &inputFile);
+  printArrayInFile("HamletOutput.txt", &inputFile, reversedArray);
+
+  printArrayInFile("HamletOutput.txt", &inputFile, origArray);
 
   return 0;
 }

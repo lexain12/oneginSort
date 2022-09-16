@@ -179,29 +179,56 @@ void sortOnegin(InputFile* inputFile) // size_t
 //    fclose(openedFile);
 //}
 
-void printArrayInFile(const char* outputFile, InputFile* inputFile)
+void printArrayInFile(const char* outputFile,InputFile* inputFile, int printArg)
 {
-    FILE* fileToPrint = fopen(outputFile, "w");
-    ASSERT(fileToPrint != nullptr);
-    // fseek(fileToPrint, 0l, SEEK_SET);
+    switch (printArg)
+    {
+        case sortedArray:
+        {
+            FILE* fileToPrint = fopen(outputFile, "w");
+            ASSERT(fileToPrint != nullptr);
+            // fseek(fileToPrint, 0l, SEEK_SET);
 
-    for (size_t i = 0; i < inputFile->numberOfLines; ++i)
-        fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
+            for (size_t i = 0; i < inputFile->numberOfLines; ++i)
+                fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
 
-    fclose(fileToPrint);
-}
+            fclose(fileToPrint);
+            return;
+        }
+        case reversedArray:
+        {
+            FILE* fileToPrint = fopen(outputFile, "a");
+            ASSERT(fileToPrint != nullptr);
+            // fseek(fileToPrint, 0l, SEEK_END);
 
-void addArrayInFile(const char* outputFile,InputFile* inputFile)
-{
-    FILE* fileToPrint = fopen(outputFile, "a");
-    ASSERT(fileToPrint != nullptr);
-    // fseek(fileToPrint, 0l, SEEK_END);
+            fprintf(fileToPrint, "-------------------------------------------------------\n");
 
-    fprintf(fileToPrint, "-------------------------------------------------------");
+            for (size_t i = 0; i < inputFile->numberOfLines; ++i)
+                fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
 
-    for (size_t i = 0; i < inputFile->numberOfLines; ++i)
-        fprintf(fileToPrint, "%s\n", ((inputFile->arrayOfLines)[i]).charArray);
+            fclose(fileToPrint);
+            return;
+        }
+        case origArray:
+        {
+            FILE* fileToPrint = fopen(outputFile, "a");
+            fprintf(fileToPrint, "------------------------------------------------------\n");
 
-    fclose(fileToPrint);
+            size_t i = 0;
+            for (;inputFile->text[i] != '\n'; i++) 
+            {
+                if (inputFile->text[i] == '\0') 
+                {
+                    inputFile->numberOfLines += 1;
+                    inputFile->text[i] = '\n';
+                }
+            }
+        //    fprintf(stderr, "%s", fileArray);
+        //    fprintf(stderr, "%d", inputFile->numberOfLines);
+
+            inputFile->text[i] = '\0';
+            fprintf(fileToPrint, "%s", inputFile->text);
+        }
+    }
 }
 

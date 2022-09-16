@@ -3,6 +3,10 @@
     printf("Error in condition:%s line:%d\n", #condition, __LINE__); \
 }
 
+const int sortedArray   = 0;
+const int reversedArray = 1;
+const int origArray     = 2;
+
 struct Line
 {
     size_t length   = 0;
@@ -27,7 +31,7 @@ void swapLines(char* line1, char* line2);
 
 void readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines);
 
-void printArrayInFile(const char* outputFile,InputFile* inputFile);
+void printArrayInFile(const char* outputFile,InputFile* inputFile, int printArg);
 
 void readFileToArray(InputFile* inputFile);
 
