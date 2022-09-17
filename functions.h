@@ -2,10 +2,19 @@
 {                                                    \
     printf("Error in condition:%s line:%d\n", #condition, __LINE__); \
 }
+#include <cstddef>
 
 const int sortedArray   = 0;
 const int reversedArray = 1;
 const int origArray     = 2;
+
+enum Status
+{
+    noErrors     = 0,
+    inputError   = 1,
+    readingError = 2,
+    printError   = 3,
+};
 
 struct Line
 {
@@ -27,17 +36,23 @@ int countLines(FILE *intputFile);
 
 void sortOnegin(InputFile* inputFile);
 
+int readFileToLinesStruct(FILE* openedFile, InputFile* inputFile);
+
+int splitIntoLines(char* text, size_t numberOfLines, Line* arrayOfLines);
+
 void swapLines(char* line1, char* line2);
 
-void readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines);
+int readLines(char **arrayOfLines, FILE *inputFile, size_t numberOfLines);
 
-void printArrayInFile(const char* outputFile,InputFile* inputFile, int printArg);
+Status printArrayInFile(FILE* fileToPrint, InputFile* inputFile);
 
-void readFileToArray(InputFile* inputFile);
+Status printOrig(FILE* fileToPrint, char* buf);
 
-void readFile(InputFile *inputFile);
+void textToStr(char* text, int numberOfLines);
 
-void splitIntoLines(InputFile *inputFile);
+void readFile(FILE* openedFile, char* dest);
 
 void addArrayInFile(const char* outputFile,InputFile* inputFile);
+
+int checkArg(int numberOfArguments, const char* argumentsOfCmd[], InputFile* inputFile, char** outputFilePtr);
 

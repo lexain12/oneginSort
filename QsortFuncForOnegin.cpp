@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <assert.h>
 #include <time.h>
 #include <cstring>
@@ -15,36 +15,15 @@ int cmpint(const void* arg1, const void* arg2)
         return 1;
     else if (*((int*)arg1) == *((int*)arg2))
         return 0;
-    else 
+    else
         return -1;
-}
-
-int strcmp1(const char* arg1, const char* arg2)
-{
-    assert(arg1 != NULL);
-    assert(arg2 != NULL);
-
-    while (*arg1 != '\0' && *arg2 != '\0')
-    {
-        while (!isalpha(*arg1) && *arg1 != '\0')
-            ++arg1;
-        while (!isalpha(*arg2) && *arg2 != '\0')
-            ++arg2;
-
-        if (*arg1 != *arg2 && arg1 && arg2)
-            return toupper(*arg1) - toupper(*arg2);
-        ++arg1;
-        ++arg2;
-    }
-
-    return *arg1 - *arg2;
 }
 
 int cmpstr(const void* arg1, const void* arg2)
 {
     assert(arg1 != NULL);
     assert(arg2 != NULL);
-    
+
     const char** str1 = ((const char**)arg1);
     const char** str2 = ((const char**)arg2);
 
@@ -53,9 +32,9 @@ int cmpstr(const void* arg1, const void* arg2)
 
 int cmpstruct(const void* arg1, const void* arg2)
 {
-    assert(arg1 != NULL);
-    assert(arg2 != NULL);
-    
+    ASSERT(arg1 != NULL);
+    ASSERT(arg2 != NULL);
+
     const char* str1 = ((Line*) arg1)->charArray;
     const char* str2 = ((Line*) arg2)->charArray;
 
@@ -64,11 +43,37 @@ int cmpstruct(const void* arg1, const void* arg2)
     return isBigger(str1, str2);
 }
 
+int isBigger(const char* line1, const char* line2)
+{
+    ASSERT(line1 != nullptr);
+    ASSERT(line2 != nullptr);
+
+    while (*line1 && *line2 && *line1 != '\n' && *line2 != '\n')
+    {
+        if (isalpha(*line1) && isalpha(*line2))
+        {
+            if (toupper(*line1) != toupper(*line2))
+            {
+                return toupper(*line1) - toupper(*line2);
+            }
+            ++line1;
+            ++line2;
+        }
+        while (!isalpha(*line1) && *line1 != '\n')
+            ++line1;
+
+        while (!isalpha(*line2) && *line2 != '\n')
+            ++line2;
+    }
+
+    return *line1 - *line2;
+}
+
 int cmpstructReverse(const void* arg1, const void* arg2)
 {
-    assert(arg1 != NULL);
-    assert(arg2 != NULL);
-    
+    ASSERT(arg1 != NULL);
+    ASSERT(arg2 != NULL);
+
     const char*  line1   = ((Line*) arg1)->charArray;
     const char*  line2   = ((Line*) arg2)->charArray;
     const size_t length1 = ((Line*) arg1)->length;
@@ -83,10 +88,10 @@ int cmpstructReverse(const void* arg1, const void* arg2)
         return *line2 - *line1;
     }
 
-    assert(*index1 != '\0');
-    assert(*index2 != '\0');
+    ASSERT(*index1 != '\0');
+    ASSERT(*index2 != '\0');
 
-    while (index1 != line1 && index2 != line2) 
+    while (index1 != line1 && index2 != line2)
     {
         if (isalpha(*index1) && isalpha(*index2))
         {
@@ -96,7 +101,7 @@ int cmpstructReverse(const void* arg1, const void* arg2)
             --index1;
             --index2;
         }
-        while (!isalpha(*index1) && index1 != line1) 
+        while (!isalpha(*index1) && index1 != line1)
             --index1;
 
         while (!isalpha(*index2) && index2 != line2)
@@ -106,10 +111,10 @@ int cmpstructReverse(const void* arg1, const void* arg2)
     return *index1 - *index2;
 }
 
-void swap(void* first, void* second, size_t size) 
+void swap(void* first, void* second, size_t size)
 {
-    assert(first  != NULL);
-    assert(second != NULL);
+    ASSERT(first  != NULL);
+    ASSERT(second != NULL);
 
     for (size_t index = 0; index < size; index++)
     {
@@ -121,11 +126,11 @@ void swap(void* first, void* second, size_t size)
 
 void Qsort(void* array, size_t n, size_t size, int (*cmp)(const void*, const void*))
 {
-    assert(array != NULL);
+    ASSERT(array != NULL);
 
     char* base = (char*) array;
 
-    size_t right = n - 1; 
+    size_t right = n - 1;
     size_t left  = 0;
 
     if (left >= right || n == 0)
